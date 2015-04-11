@@ -8,7 +8,7 @@ math_namespace = vars(math).copy()
 math_namespace['__builtins__'] = None
 
 regex_function = r'(\d+!|\d+(\.\d+)?\^\d+|\|[+,-]?\d+(\.\d+)?\|)'
-regex_value = r'(\d+|\d+\.\d+|'+regex_function+')'
+regex_value = r'((([1-9]\d*|0)(\.\d+)?)|'+regex_function+')'
 regex_operation = r'(\+|\-|\*|\/)'
 regex_all = '^[+,-]?('+regex_value+regex_operation+')*'+regex_value+"$"
 valid_pattern = re.compile(regex_all)
