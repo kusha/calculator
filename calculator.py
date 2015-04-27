@@ -77,8 +77,8 @@ class Calculator:
         self.input_widget.config(justify=RIGHT)
 
         self.result_widget = Entry(
-            frame_right, text='Type your expression', state='readonly')
-        self.result_widget.config(bg='white', fg='grey')
+            frame_right, text='Type your expression', state='normal')
+        self.result_widget.config(bg='white', fg='grey', state='readonly')
         self.result_widget.config(font=labelfont)
         self.result_widget.config(justify=RIGHT)
 
@@ -107,6 +107,8 @@ class Calculator:
         self.button_up.pack(expand=YES, fill=BOTH)
         self.index_widget.pack(expand=YES, fill=BOTH)
         self.button_down.pack(expand=YES, fill=BOTH)
+
+        self.draw()
 
         self.root.mainloop()
 
@@ -185,7 +187,9 @@ class Calculator:
         """
         This method uses mathlib to evaluate current expression.
         """
-        result = mathlib.evaluate(self.input_string, self.story)
+        story = [None] + \
+            [float(i[1]) if i[1] is not None else i[1] for i in self.story]
+        result = mathlib.evaluate(self.input_string, story)
         if result:
             self.result = result
             self.valid = True
@@ -204,7 +208,10 @@ class Calculator:
         """
         self.index_widget['text'] = '#'+str(self.selected+1)
         if self.result is None:
-            # self.result_widget['text'] = 'Type your expression'
+            self.result_widget.config(state='normal')
+            self.result_widget.delete(0, END)
+            self.result_widget.insert(0, 'Type your expression')
+            self.result_widget.config(bg='white', fg='grey', state='readonly')
             return
         if self.valid:
             self.input_widget.config(fg='black')
