@@ -5,6 +5,9 @@
 all:
 	python3 setup.py build
 
+run:
+	python3 calculator.py
+
 install:
 	python3 setup.py install
 
