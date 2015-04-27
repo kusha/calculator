@@ -14,7 +14,14 @@ __maintainer__ = "Mark Birger"
 __status__ = "Production"
 
 import mathlib
-from tkinter import *
+import sys
+try:
+    from tkinter import *                    
+except ImportError:
+    print("Tk is not available in PyPi.")
+    print("You need to manually install it:")
+    print("sudo apt-get install python3-tk")
+    sys.exit(1)
 
 class Calculator:
 
@@ -177,5 +184,8 @@ class Calculator:
             self.result_widget.insert(0, self.result)
             self.result_widget.config(bg='white', fg='grey', state='readonly')
 
+def main():
+    Calculator()
+
 if __name__ == "__main__":
-    CALCULATOR = Calculator()
+    main()
