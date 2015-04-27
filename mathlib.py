@@ -18,7 +18,7 @@ operands = r"[\+\-\*\/\^\%]"
 value = left+r"*("+digit+r"|"+tag+r")"+right+r"*"
 unit = r"("+value+r"|("+operands+value+r"))*"
 
-dig=r"\d+(\.\d+)?";
+dig=r"((\d+(\.\d+)?)|(\#[1-9][0-9]?))";
 
 regex_all = r"^"+value+r"("+operands+value+r")*$"
 print(regex_all)
