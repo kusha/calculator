@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
-"""
-Basic calculator with GUI.
+"""@package docstring
+@brief Basic calculator with GUI.
+@mainpage Calculator module. After installation avialable
+with rhcalc command.
 """
 
 __author__ = "Mark Birger, Daniil Khudiakov, Martin Knotek"
@@ -24,6 +26,10 @@ except ImportError:
     sys.exit(1)
 
 class Calculator:
+    """
+    Class implements calculator with GUI.
+    Uses evaluation form mathlib.
+    """
 
     def __init__(self):
         self.story = [["", None, False]]
@@ -41,6 +47,11 @@ class Calculator:
         self.init_gui()
 
     def init_gui(self):
+        """
+        This method creates windows, widgets and other things.
+        GUI is implemented with Tk. It's mainloop at the end
+        of this method.
+        """
 
         self.root = Tk()
         self.root.wm_title("RedHead Calculator")
@@ -100,21 +111,34 @@ class Calculator:
         self.root.mainloop()
 
     def story_save(self):
+        """
+        Saves actual exression and result at each change.
+        """
         self.story[self.selected][0] = self.input_string
         self.story[self.selected][1] = self.result
         self.story[self.selected][2] = self.valid
 
-    def story_up(self, event=None):
+    def story_up(self):
+        """
+        Moves up in results story. It's button callback.
+        """
         self.root.focus()
         self.selected -= 1
         self.story_update()
 
-    def story_down(self, event=None):
+    def story_down(self):
+        """
+        Moves down in results story. It's button callback.
+        """
         self.root.focus()
         self.selected += 1
         self.story_update()
 
     def story_update(self):
+        """
+        This method locks button if necessary and creates new
+        cell if they are not created.
+        """
         if self.selected < 0:
             self.selected = 0
         if self.selected > 98:
@@ -148,12 +172,19 @@ class Calculator:
         self.count()
 
     def callback(self, input_string):
+        """
+        Method called at each input expression form change.
+        @param input_string tkinter string object with Entry content
+        """
         if not self.update_locked:
             self.input_string = input_string.get()
             print(self.input_string)
             self.count()
 
     def count(self):
+        """
+        This method uses mathlib to evaluate current expression.
+        """
         result = mathlib.evaluate(self.input_string, self.story)
         if result:
             self.result = result
@@ -167,6 +198,10 @@ class Calculator:
         self.draw()
 
     def draw(self):
+        """
+        Method updates GUI (forms, labels) after each
+        model change.
+        """
         self.index_widget['text'] = '#'+str(self.selected+1)
         if self.result is None:
             # self.result_widget['text'] = 'Type your expression'
@@ -185,6 +220,9 @@ class Calculator:
             self.result_widget.config(bg='white', fg='grey', state='readonly')
 
 def main():
+    """
+    Main function needed for rhcalc call.
+    """
     Calculator()
 
 if __name__ == "__main__":
