@@ -45,7 +45,6 @@ def evaluate(expression, story):
     """
     if expression is None:
         return None
-    print("STORY:", story)
     expression = expression
     namespace = MATH_NAMESPACE
     namespace["evaluate"] = evaluate
@@ -103,7 +102,6 @@ def evaluate(expression, story):
             result = eval(expression, namespace)
             result = int(result) if int(result) == float(result)\
                 else round(float(result), 8)
-            print("RESULT:", result)
             return str(result)
         return None
     except Exception:

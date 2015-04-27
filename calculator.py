@@ -160,13 +160,9 @@ class Calculator:
             self.button_down['state'] = DISABLED
         else:
             self.button_down['state'] = 'normal'
-        print(self.story[self.selected])
         self.input_string = self.story[self.selected][0]
-        print(self.story[self.selected])
         self.result = self.story[self.selected][1]
-        print(self.story[self.selected])
         self.valid = self.story[self.selected][2]
-        print(self.story[self.selected])
         self.update_locked = True
         self.input_widget.delete(0, END)
         self.input_widget.insert(0, self.input_string)
@@ -180,7 +176,6 @@ class Calculator:
         """
         if not self.update_locked:
             self.input_string = input_string.get()
-            print(self.input_string)
             self.count()
 
     def count(self):
@@ -196,9 +191,7 @@ class Calculator:
         else:
             # self.result = None
             self.valid = False
-        print("count", self.story[self.selected])
         self.story_save()
-        print("count", self.story[self.selected])
         self.draw()
 
     def draw(self):
