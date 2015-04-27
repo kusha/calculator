@@ -1,47 +1,47 @@
-# Navod na pouziti
+# Návod na použití
 
-## Seznam matematickych operaci
-Operace|Syntaxe|Priklad
+## Seznam matematických operací
+Operace|Syntaxe|Příklad
 ---|---|---
 Sčítání | + | 3+5=8
 Odčítání | - | 3-5=2
 Dělení | / | 3/5=0.6
-Zbytek po deleni | % | 3%5=3
+Zbytek po dělení | % | 3%5=3
 Mocnina | ^ | 3^2=9
 Faktorial | ! | 3!=6
 Zaokrouhlení dolů | ~ | ~3.5=3
 
 
-## Pouzity grafickeho rozhrani
+## Použití grafického rozhraní
 
 ![image](screenshot.png) 
 
-Kalkulacka ma seznam vysledku. Indexace vysledku zacina se od #1. Na leve strane mame navigace mezi vypocty.
+Kalkulačka má seznam výsledků. Indexace výsledku začíná od #1. Na levé straně máme navigaci mezi výpočty.
 
-Na prave strane mame dva pole. Pole dolu je readonly a slouzi pro vysledek. Uzivatel zada vstup do pole nahore. Rozhodli jsme neimlementovat klavisnice tlacitek, protoze mame implementace v Pythonu a je urcena pro desktopy. Z predmetu ITU jsem vime, ze mene elementu uzivatelskeho rozhrani je lepsi cesta. Kalkulacka vyuziva live-update vysledku podle vstupu uzivatelu.
+Na pravé straně máme dvě pole. Dolní pole je readonly a slouží pro zobrazení výsledeku. Uživatel zadává vstup do pole nahoře. Rozhodli jsme neimlementovat klávisnici s tlačítky, protože máme implementaci v Pythonu a je určena pro desktopy. Z předmětu ITU víme, že méně elementů uživatelského rozhraní je lepší cesta. Kalkulačka využívá live-update vysledku podle vstupu uživatele.
 
 
-## Spusteni, instalace, testovani
+## Spuštění, instalace, testovaní
 
-Instalace realizovana pomoci standrtni funkcionality Python - pomoci setuputils. Tkinter, ktery slouzi pro implementace GUI neni predstaven v PyPi repositare, a je pripadne potrba nainstalovat pomoci aptitude.
+Instalace realizována pomocí standartní funkcionality Python - pomoci setuputils. Tkinter, který slouží pro implementace GUI není představen v PyPi repozitáře, a je připadně potřeba nainstalovat pomocí aptitude.
 	
 	sudo apt-get install python3-tk
 	
-Ale, tkinter je soucast standartni distribuce Python, a toto je potreba jen v pripade exoticke/stare instalace Python.
+Ale, tkinter je součást standartní distribuce Python, a toto je potřeba jen v případě exotické/staré instalace Python.
 
-Vytvorili jsme taky Makefile, ktery ma tuto funkcionalitu:
+Vytvořili jsme také Makefile, který má tuto funkcionalitu:
 
 	make
 
-Vytvary build adresar pomoci setup.py
+Vytvoří build adresář pomocí setup.py
 
 	make run
 
-Spusti kalakulacku s grafickym rozhranim.
+Spustí kalakulačku s grafickým rozhraním.
 
 	make install
 
-Nainstaluje matematickou knihovnu (bude dostupna pomoci `import mathlib`). Vytvari prikaz `rhclac`, ktery spusti kalkulacky.
+Nainstaluje matematickou knihovnu (bude dostupná pomocí `import mathlib`). Vytváří příkaz `rhclac`, který spustí kalkulačku.
 
 	make uninstall
 
@@ -49,11 +49,11 @@ Odinstaluje knihovnu a rhcalc.
 
 	make doc
 
-Vygeneruje dokumentaci pomoci doxygenu.
+Vygeneruje dokumentaci pomocí doxygenu.
 
 	make test
-Spusti unit testy matematicke knihony
+Spustí unit testy matematické knihovny
 
 	make clean
 
-Vycisty build, dokumentace atd.
+Vyčistí build, dokumentaci atd.
