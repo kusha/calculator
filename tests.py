@@ -61,7 +61,6 @@ class Mathlibtests(unittest.TestCase):
         """
         self.assertEqual(evaluate("7!", STORY), "5040")
         self.assertEqual(evaluate("0!", STORY), "1")
-        # self.assertEqual(evaluate("3.3!", STORY), "362880")
         self.assertEqual(evaluate("3!!", STORY), "720")
         self.assertEqual(evaluate("3!!+3!", STORY), "726")
         self.assertEqual(evaluate("(3!+3)!", STORY), "362880")
@@ -74,28 +73,27 @@ class Mathlibtests(unittest.TestCase):
         self.assertEqual(evaluate("0^0", STORY), "1")
         self.assertEqual(evaluate("4^4", STORY), "256")
         self.assertEqual(evaluate("4^-4", STORY), "0.00390625")
-        self.assertEqual(evaluate("4^0.4", STORY), "0.00390625")
-        self.assertEqual(evaluate("4^-0.4", STORY), "256")
+        self.assertEqual(evaluate("4^0.4", STORY), "1.74110113")
+        self.assertEqual(evaluate("4^-0.4", STORY), "0.57434918")
         self.assertEqual(evaluate("4^(4-2)", STORY), "16")
         self.assertEqual(evaluate("((4-4)+4)^((4-4)+4)", STORY), "256")
 
-    def test_abs(self):
+    def test_floor(self):
         """
         Tests for absolute function.
         """
-        self.assertEqual(evaluate("|+43|", STORY), "43")
-        self.assertEqual(evaluate("|0.5-20|", STORY), "19.5")
-        self.assertEqual(evaluate("||5+5||", STORY), "10")
-        self.assertEqual(evaluate("|(32-52)|", STORY), "20")
+        self.assertEqual(evaluate("~0.5", STORY), "0")
+        self.assertEqual(evaluate("~-0.5", STORY), "-1")
+        self.assertEqual(evaluate("~(0.5*3+~1.7)", STORY), "2")
 
     def test_hard(self):
         """
         Hard test cases.
         """
         self.assertEqual(evaluate("(2^2)!", STORY), "24")
-        self.assertEqual(evaluate("|4+4|!", STORY), "40320")
+        self.assertEqual(evaluate("(~3.3-~-1.7)!", STORY), "120")
         self.assertEqual(evaluate("4^4!", STORY), "281474976710656")
-        self.assertEqual(evaluate("||3!-4^4|*-12|/6", STORY), "500")
+        self.assertEqual(evaluate("~3.2!-4^~(11/3)", STORY), "-58")
             
     def test_invalid(self):
         """
@@ -106,9 +104,6 @@ class Mathlibtests(unittest.TestCase):
         self.assertEqual(evaluate("65+", STORY), None)
         self.assertEqual(evaluate("*65", STORY), None)
         self.assertEqual(evaluate("(((23))", STORY), None)
-        self.assertEqual(evaluate("|23)", STORY), None)
-        self.assertEqual(evaluate("|(33+52|)", STORY), None)
-        self.assertEqual(evaluate("|5454+54)", STORY), None)
 
 if __name__ == '__main__':
     unittest.main()
