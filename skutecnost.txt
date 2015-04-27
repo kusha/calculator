@@ -1,0 +1,21 @@
+29.03.2015 - 4.04.2015
+	návrh, sketch GUI podle plánu
+	setkání
+
+5.04.2015 - 11.04.2015
+	vytvořili jsme jednoduchou verze matematické knihovny,
+	ale kvůli rozšířením upravovali jsme matematickou knihovnu
+	až do finálního termínu
+
+12.04.2015 - 19.04.2015
+	implementace GUI byla provedena až na začátku
+	posledneho týdne
+
+19.04.2015 - 26.04.2015
+	implementace GUI
+	testovaní, byla navrhnuta testovací sada
+	zkoušeli jsme napsat rozšířené verze zadání
+
+27.04.2015
+	příprava k odevzdaní, skutečnost.txt,
+	uživatelská příručka, generace dokumentace
