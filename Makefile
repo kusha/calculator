@@ -14,5 +14,8 @@ uninstall:
 doc:
 	doxygen Doxyfile
 
+test:
+	python3 tests.py
+
 clean:
 	rm -rf ./build ./dist ./docs redhead_calculator.egg-info
