@@ -12,7 +12,7 @@ digit = r"([\-\+]?\d+(\.\d+)?)"
 tag = r"(\#[1-9][0-9]?)"
 left = r"[\(\|]"
 right = r"[\)\|\!]"
-operands = r"[\+\-\*\/\^]"
+operands = r"[\+\-\*\/\^\%]"
 
 value = left+r"*("+digit+r"|"+tag+r")"+right+r"*"
 unit = r"("+value+r"|("+operands+value+r"))*"
@@ -34,12 +34,12 @@ def evaluate(expression, story):
             expression = "("+expression+")"
             while(True):
               expression=re.sub(r'('+dig+'!)', "("+r'\1'+")", expression)
-              expression=re.sub(r'('+dig+'\^(\d+))', "("+r'\1'+")", expression)
+              expression=re.sub(r'('+dig+'\^('+digit+'))', "("+r'\1'+")", expression)
               #print("expression:"+expression)
               oldexpr=expression
               subexpr=re.sub(r'(.*)(\([^\(\)]+\))(.*)', r'\2', expression)
-              subexpr = re.sub(r'('+dig+')\^(\d+)', "pow("+r'\1'+","+r'\3'+")", subexpr)
-              subexpr = re.sub(r'('+dig+')!', "factorial("+r'\1'+")", subexpr)
+              subexpr = re.sub(r'('+dig+')\^('+digit+')', "pow("+r'\1'+","+r'\3'+")", subexpr)
+#              subexpr = re.sub(r'('+dig+')!', "factorial("+r'\1'+")", subexpr)
               subexpr = re.sub(r'\|('+digit+')\|', "(fabs("+r'\1'+"))", subexpr)
               subresult = eval(subexpr, namespace)
               subresult = int(subresult) if int(subresult) == float(subresult) else round(float(subresult),8)
