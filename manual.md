@@ -1,30 +1,59 @@
-Dokumentace k projektu do IVS
-Uzivatelska Pirucka
+# Navod na pouziti
 
-Kalkulačka
-3. projekt
+## Seznam matematickych operaci
+Operace|Syntaxe|Priklad
+---|---|---
+Sčítání | + | 3+5=8
+Odčítání | - | 3-5=2
+Dělení | / | 3/5=0.6
+Zbytek po deleni | % | 3%5=3
+Mocnina | ^ | 3^2=9
+Faktorial | ! | 3!=6
+Zaokrouhlení dolů | ~ | ~3.5=3
 
 
-26.4.2015
+## Pouzity grafickeho rozhrani
+
+![image](screenshot.png) 
+
+Kalkulacka ma seznam vysledku. Indexace vysledku zacina se od #1. Na leve strane mame navigace mezi vypocty.
+
+Na prave strane mame dva pole. Pole dolu je readonly a slouzi pro vysledek. Uzivatel zada vstup do pole nahore. Rozhodli jsme neimlementovat klavisnice tlacitek, protoze mame implementace v Pythonu a je urcena pro desktopy. Z predmetu ITU jsem vime, ze mene elementu uzivatelskeho rozhrani je lepsi cesta. Kalkulacka vyuziva live-update vysledku podle vstupu uzivatelu.
 
 
-Autoři projektu: Mark Birger (vedoucí týmu)
-				xbirge00@stud.fit.vutbr.cz 			 Daniil Khudiakov
-				xkhudi00@stud.fit.vutbr.cz 		 	 Martin Knotek
-				xknote10@stud.fit.vutbr.cz
-	 
-Úvod
-V tomto dokumentu je popsána proces vytvoření grafické aplikace, která funguje jako jednoduchá kalkulačka. 
-Analýza problému a princip jeho řešení
-Za úkol jsme dostali implementovat kalkulačku v libovolném programovacím jazyce, která bude umět spočítat základní matematické operace (sčítání, odčítání, násobení a dělení), faktoriál, umocňování s přirozenými exponenty a jednu další funkci, dle našeho výběru.
-Napadli nás dva základní způsoby řešení matematických výpočtů. První princip využívá zásobník, další pak regulární výrazy.
-Mezi další funkce, vhodné k rozšíření funkcionality, se nám zdál být vhodný výpočet absolutní hodnoty, logaritmu, odmocniny či zaokrouhlení.
-Návrh řešení
-Jelikož už jsme absolvovali předmět IFJ, kde se v projektu aplikovali matematické výpočty právě pomocí zásobníku, a chtěli se naučit něco nového, tak jsme se rozhodli pro implementaci pomocí regulárních výrazů.
-Jako programovací jazyk  jsme vybrali Python, neboť je přehledný a dobře se v něm pracuje s regulárními výrazy. Navíc s ním všichni máme alespoň základní zkušenosti.
-K funkcím jsme přidali výpočet absolutní hodnoty.
-Popis řešení
-Uživatel zadá na vstup jednoduchou rovnici. Nejdříve se zjistí, zda takto získaný text je validní. Pokud rovnice obsahuje jiné než základní matematické operace (+,-,*,/), tak následuje nahrazení matematických operátorů (např. operátor ^ pro mocninu) a číselných hodnot s nimi spojených. Takovéto výrazy jsou nahrazeny odpovídající funkcí z modulu math. Výsledný text je předán interpretu jazyka, který vše spočítá a vrátí výsledek.
-K vyhledávání a nahrazování jednotlivých částí textu získaného od uživatele jsme použili regulární výrazy. 
-Závěr
-Kalkulačka zvládá jak základní výpočty (+,-,*,/), tak výpočty funkcí (mocnina, faktoriál, absolutní hodnota) a je rozšířena o možnost počítání se závorkami.
+## Spusteni, instalace, testovani
+
+Instalace realizovana pomoci standrtni funkcionality Python - pomoci setuputils. Tkinter, ktery slouzi pro implementace GUI neni predstaven v PyPi repositare, a je pripadne potrba nainstalovat pomoci aptitude.
+	
+	sudo apt-get install python3-tk
+	
+Ale, tkinter je soucast standartni distribuce Python, a toto je potreba jen v pripade exoticke/stare instalace Python.
+
+Vytvorili jsme taky Makefile, ktery ma tuto funkcionalitu:
+
+	make
+
+Vytvary build adresar pomoci setup.py
+
+	make run
+
+Spusti kalakulacku s grafickym rozhranim.
+
+	make install
+
+Nainstaluje matematickou knihovnu (bude dostupna pomoci `import mathlib`). Vytvari prikaz `rhclac`, ktery spusti kalkulacky.
+
+	make uninstall
+
+Odinstaluje knihovnu a rhcalc.
+
+	make doc
+
+Vygeneruje dokumentaci pomoci doxygenu.
+
+	make test
+Spusti unit testy matematicke knihony
+
+	make clean
+
+Vycisty build, dokumentace atd.
