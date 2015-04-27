@@ -6,6 +6,12 @@ Basic calculator with GUI.
 
 __author__ = "Mark Birger, Daniil Khudiakov, Martin Knotek"
 __date__ = "26 Apr 2015"
+__credits__ = ["Mark Birger", "Daniil Khudiakov", "Martin Knotek"]
+
+__license__ = "GNU General Public License v3.0"
+__version__ = "1.0"
+__maintainer__ = "Mark Birger"
+__status__ = "Production"
 
 import mathlib
 from tkinter import *
@@ -19,6 +25,12 @@ class Calculator:
         self.result = None
         self.valid = False
         self.update_locked = False
+        self.root = None
+        self.input_widget = None
+        self.result_widget = None
+        self.index_widget = None
+        self.button_up = None
+        self.button_down = None
         self.init_gui()
 
     def init_gui(self):
@@ -32,22 +44,25 @@ class Calculator:
         self.root.bind('z', self.story_up)
         self.root.bind('x', self.story_down)
 
-        frame_left =Frame(self.root,width=100,heigh=100,bd=10)
-        frame_right =Frame(self.root,width=150,heigh=75,bd=10)
+        frame_left = Frame(self.root, width=100, heigh=100, bd=10)
+        frame_right = Frame(self.root, width=150, heigh=75, bd=10)
 
         input_string = StringVar()
-        input_string.trace("w", lambda name, index, mode, input_string=input_string: self.callback(input_string))
+        input_string.trace(
+            "w", 
+            lambda name, index, mode, input_string=input_string: \
+            self.callback(input_string))
 
         self.input_widget = Entry(frame_right, textvariable=input_string)
         self.input_widget.config(bg='white', fg='black')
         self.input_widget.config(font=labelfont)
         self.input_widget.config(justify=RIGHT)
 
-        self.result_widget = Entry(frame_right, text='Type your expression', state='readonly')
+        self.result_widget = Entry(
+            frame_right, text='Type your expression', state='readonly')
         self.result_widget.config(bg='white', fg='grey')
         self.result_widget.config(font=labelfont)
         self.result_widget.config(justify=RIGHT)
-        # self.result_widget.config(height=1, width=20)
 
         self.index_widget = Label(frame_left, text='#'+str(self.selected+1))
         self.index_widget.config(bg='white', fg='black')
@@ -55,11 +70,18 @@ class Calculator:
         self.index_widget.config(justify=RIGHT)
         self.index_widget.config(height=1, width=3)
 
-        self.button_up = Button(frame_left, text="Previous", command=self.story_up, state=DISABLED)
-        self.button_down = Button(frame_left, text="New", command=self.story_down)
+        self.button_up = Button(
+            frame_left, 
+            text="Previous", 
+            command=self.story_up, 
+            state=DISABLED)
+        self.button_down = Button(
+            frame_left, 
+            text="New", 
+            command=self.story_down)
 
-        frame_left.pack(side = 'left')
-        frame_right.pack(side = 'right')
+        frame_left.pack(side='left')
+        frame_right.pack(side='right')
 
         self.input_widget.pack(expand=YES, fill=BOTH)
         self.result_widget.pack(expand=YES, fill=BOTH)
@@ -113,8 +135,8 @@ class Calculator:
         self.valid = self.story[self.selected][2]
         print(self.story[self.selected])
         self.update_locked = True
-        self.input_widget.delete(0,END)
-        self.input_widget.insert(0,self.input_string)
+        self.input_widget.delete(0, END)
+        self.input_widget.insert(0, self.input_string)
         self.update_locked = False
         self.count()
 
@@ -144,18 +166,16 @@ class Calculator:
             return
         if self.valid:
             self.input_widget.config(fg='black')
-            # self.result_widget['text'] = self.result   
             self.result_widget.config(state='normal')
-            self.result_widget.delete(0,END)
-            self.result_widget.insert(0,self.result)
+            self.result_widget.delete(0, END)
+            self.result_widget.insert(0, self.result)
             self.result_widget.config(bg='white', fg='black', state='readonly')
         else:
             self.input_widget.config(fg='red')
-            # self.result_widget['text'] = self.result
             self.result_widget.config(state='normal')
-            self.result_widget.delete(0,END)
-            self.result_widget.insert(0,self.result)
+            self.result_widget.delete(0, END)
+            self.result_widget.insert(0, self.result)
             self.result_widget.config(bg='white', fg='grey', state='readonly')
 
 if __name__ == "__main__":
-    calculator = Calculator()
+    CALCULATOR = Calculator()
