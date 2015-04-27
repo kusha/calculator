@@ -3,6 +3,7 @@ import re
 
 math_namespace = vars(math).copy()
 math_namespace['__builtins__'] = None
+#!/usr/bin/env python3
 
 # regex_function = r'(\d+!|\d+(\.\d+)?\^\d+|\|[+,-]?\d+(\.\d+)?\|)'
 # regex_value = r'((([1-9]\d*|0)(\.\d+)?)|'+regex_function+')'
@@ -10,8 +11,8 @@ math_namespace['__builtins__'] = None
 # regex_all = '^[+,-]?('+regex_value+regex_operation+')*'+regex_value+"$"
 digit = r"([\-\+]?\d+(\.\d+)?)"
 tag = r"(\#[1-9][0-9]?)"
-left = r"[\(\|\_]"
-right = r"[\)\|\!]"
+left = r"[\(\~]"
+right = r"[\)\!]"
 operands = r"[\+\-\*\/\^\%]"
 
 value = left+r"*("+digit+r"|"+tag+r")"+right+r"*"
@@ -35,13 +36,13 @@ def evaluate(expression, story):
             while(True):
               expression=re.sub(r'('+dig+'!)', "("+r'\1'+")", expression)
               expression=re.sub(r'('+dig+'\^('+digit+'))', "("+r'\1'+")", expression)
-              expression=re.sub(r'(\_('+digit+'))', "("+r'\1'+")", expression)
+              expression=re.sub(r'(\~('+digit+'))', "("+r'\1'+")", expression)
               #print("expression:"+expression)
               oldexpr=expression
               subexpr=re.sub(r'(.*)(\([^\(\)]+\))(.*)', r'\2', expression)
               subexpr = re.sub(r'('+dig+')\^('+digit+')', "pow("+r'\1'+","+r'\3'+")", subexpr)
               subexpr = re.sub(r'('+dig+')!', "factorial("+r'\1'+")", subexpr)
-              subexpr=re.sub(r'\_('+digit+')', "floor("+r'\1'+")", subexpr)
+              subexpr=re.sub(r'\~('+digit+')', "floor("+r'\1'+")", subexpr)
               subresult = eval(subexpr, namespace)
               subresult = int(subresult) if int(subresult) == float(subresult) else round(float(subresult),8)
               expression=re.sub(r'(.*)(\([^\(\)]+\))(.*)', r'\1'+"\""+str(subresult)+"\""+r'\3', expression)
