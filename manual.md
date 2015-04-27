@@ -8,7 +8,7 @@ Odčítání | - | 3-5=2
 Dělení | / | 3/5=0.6
 Zbytek po dělení | % | 3%5=3
 Mocnina | ^ | 3^2=9
-Faktorial | ! | 3!=6
+Faktoriál | ! | 3!=6
 Zaokrouhlení dolů | ~ | ~3.5=3
 
 
@@ -23,11 +23,11 @@ Na pravé straně máme dvě pole. Dolní pole je readonly a slouží pro zobraz
 
 ## Spuštění, instalace, testovaní
 
-Instalace realizována pomocí standartní funkcionality Python - pomoci setuputils. Tkinter, který slouží pro implementace GUI není představen v PyPi repozitáře, a je připadně potřeba nainstalovat pomocí aptitude.
+Instalace realizována pomocí standardní funkcionality Python - pomoci setuputils. Tkinter, který slouží pro implementace GUI není představen v PyPi repozitáře, a je připadně potřeba nainstalovat pomocí aptitude.
 	
 	sudo apt-get install python3-tk
 	
-Ale, tkinter je součást standartní distribuce Python, a toto je potřeba jen v případě exotické/staré instalace Python.
+Ale, tkinter je součást standardní distribuce Python, a toto je potřeba jen v případě exotické/staré instalace Python.
 
 Vytvořili jsme také Makefile, který má tuto funkcionalitu:
 
